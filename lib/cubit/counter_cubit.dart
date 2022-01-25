@@ -9,4 +9,5 @@ class CounterCubit extends Cubit<CounterState> {
   void increment() => emit(CounterState(CounterValue: state.CounterValue + 1,wasIncremented: true));
 
   void decrement() => emit(CounterState(CounterValue: state.CounterValue - 1,wasIncremented: false));
+
 }

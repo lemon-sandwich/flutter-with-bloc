@@ -9,6 +9,6 @@ class CounterState extends Equatable{
     this.wasIncremented = false,
 });
   @override
-  List<Object> get props => [CounterValue, wasIncremented];
+  List<Object> get props => [this.CounterValue, this.wasIncremented]; // whichever variable you want to equate in different objects of a class
 
 }
