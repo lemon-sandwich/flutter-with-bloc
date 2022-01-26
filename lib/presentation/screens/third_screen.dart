@@ -26,6 +26,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: widget.colors,
       ),
       body: Center(
 
@@ -84,12 +85,14 @@ class _ThirdScreenState extends State<ThirdScreen> {
                   },
                   heroTag: 'To Remove',
                   child: Icon(Icons.remove),
+                  backgroundColor: widget.colors,
                 ),
                 FloatingActionButton(
                   onPressed: () {
                     BlocProvider.of<CounterCubit>(context).increment();
                   },
                   child: Icon(Icons.add),
+                  backgroundColor: widget.colors,
                   heroTag: 'To Add',
                 ),
               ],

@@ -97,18 +97,18 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: 24,),
             MaterialButton(onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (_) => BlocProvider.value( // BlocProvider.value helps navigate to different routes with same instance of a class
-                        value: BlocProvider.of<CounterCubit>(context), // notice that the context of navigator and blocProvider are different i.e. "_" and "context".
-                        child: SecondScreen(
-                            title: 'Second Screen',
-                            colors: Colors.red),
-                      )));
+              Navigator.of(context).pushNamed('/second');
             },
               color: widget.colors,
               child: Text('Go to second sreen'),
-            )
+            ),
+            SizedBox(height: 24,),
+            MaterialButton(onPressed: () {
+              Navigator.of(context).pushNamed('/third');
+            },
+              color: widget.colors,
+              child: Text('Go to third sreen'),
+            ),
           ],
         ),
       ),
