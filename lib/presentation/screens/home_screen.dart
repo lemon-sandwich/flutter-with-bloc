@@ -18,7 +18,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    // Advantage of BlocProvider. You just have to type WHAT to do and not HOW to do it.
+    // Just calling the functions of that CounterCubit instance. The working in CounterCubit is all removed.
+    // We don't have to type the logic of how it should be done in the CounterCubit now.
+    return BlocListener<InternetCubit, InternetState>(
+  listener: (context, state) {
+    if (state is InternetConnected && state.connectionType == ConnectionType.Wifi)
+    {
+      BlocProvider.of<CounterCubit>(context).increment();
+    }
+    else if (state is InternetConnected && state.connectionType == ConnectionType.Mobile)
+    {
+      BlocProvider.of<CounterCubit>(context).decrement();
+    }
+  },
+  child: Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -129,6 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-    );
+    ),
+);
   }
 }

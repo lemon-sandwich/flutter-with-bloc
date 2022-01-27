@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_with_bloc/cubit/internet_cubit.dart';
@@ -27,11 +26,12 @@ class MyApp extends StatelessWidget {
           create: (context) => InternetCubit(connectivity),
         ),
         BlocProvider<CounterCubit>(
-          create: (context) => CounterCubit(BlocProvider.of<InternetCubit>(context)), //
+          create: (context) => CounterCubit(),
         )
 
       ],// Providing Globally
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
