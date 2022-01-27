@@ -12,29 +12,20 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget { // Converted the class to StatefulWidget so as to dispose the instance created at the end.
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
   final AppRouter _appRouter = AppRouter();
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return BlocProvider<CounterCubit>( // Providing Globally
+      create: (context) => CounterCubit(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        onGenerateRoute: _appRouter.OnGenerateRoute,
       ),
-      onGenerateRoute: _appRouter.OnGenerateRoute,
     );
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    _appRouter.dispose(); // Always dispose the instance after its use.
-    super.dispose();
   }
 }
