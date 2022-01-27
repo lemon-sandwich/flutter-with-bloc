@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_with_bloc/presentation/router/app_router.dart';
 import 'package:flutter_with_bloc/presentation/screens/home_screen.dart';
 import 'package:flutter_with_bloc/presentation/screens/second_screen.dart';
 import 'package:flutter_with_bloc/presentation/screens/third_screen.dart';
@@ -17,8 +19,7 @@ class MyApp extends StatefulWidget { // Converted the class to StatefulWidget so
 }
 
 class _MyAppState extends State<MyApp> {
-  final CounterCubit _counterCubit = CounterCubit(); // Made a single instance of the class to be used everywhere
-
+  final AppRouter _appRouter = AppRouter();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,32 +27,14 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      routes: { // Using Generated Route Access ( More Professional )
-        '/': (context) =>
-            BlocProvider.value( // Used BlocProvider.value to pass the existing instance to the screens
-              value: _counterCubit,
-              child:
-              HomeScreen(title: 'Home Screen', colors: Colors.blueAccent),
-            ),
-        '/second': (context) =>
-            BlocProvider.value(
-              value: _counterCubit,
-              child: SecondScreen(title: 'Second Screen', colors: Colors.red),
-            ),
-        '/third': (context) =>
-            BlocProvider.value(
-              value: _counterCubit,
-              child: ThirdScreen(
-                  title: 'Third Screen', colors: Colors.greenAccent),
-            ),
-      },
+      onGenerateRoute: _appRouter.OnGenerateRoute,
     );
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    _counterCubit.close(); // Always dispose the instance after its use.
+    _appRouter.dispose(); // Always dispose the instance after its use.
     super.dispose();
   }
 }

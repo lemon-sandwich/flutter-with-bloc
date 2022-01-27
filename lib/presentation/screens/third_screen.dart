@@ -98,9 +98,11 @@ class _ThirdScreenState extends State<ThirdScreen> {
               ],
             ),
             SizedBox(height: 24,),
-            MaterialButton(onPressed: () {},
+            MaterialButton(onPressed: () {
+              Navigator.popUntil(context, (route) => route.isFirst);
+            },
               color: widget.colors,
-              child: Text('Go to second sreen'),
+              child: Text('Go to first sreen'),
             )
           ],
         ),

@@ -98,9 +98,11 @@ class _SecondScreenState extends State<SecondScreen> {
               ],
             ),
             SizedBox(height: 24,),
-            MaterialButton(onPressed: () {},
+            MaterialButton(onPressed: () {
+              Navigator.pushNamed(context, '/third');
+            },
               color: widget.colors,
-              child: Text('Go to second sreen'),
+              child: Text('Go to third sreen'),
             )
           ],
         ),
