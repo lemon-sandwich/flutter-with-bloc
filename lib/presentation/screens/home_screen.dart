@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_with_bloc/cubit/counter_cubit.dart';
+import 'package:flutter_with_bloc/cubit/internet_cubit.dart';
 import 'package:flutter_with_bloc/presentation/screens/second_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,13 +15,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +27,31 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            BlocBuilder<InternetCubit,InternetState>(
+              builder: (context,state) {
+                if (state is InternetConnected && state.connectionType == ConnectionType.Wifi)
+                  {
+                     return const Text('Wifi',
+                     style: TextStyle(
+                       fontSize: 50
+                     ),);
+                  }
+                else if (state is InternetConnected && state.connectionType == ConnectionType.Mobile)
+                {
+                  return const Text('Mobile',
+                    style: TextStyle(
+                        fontSize: 50
+                    ),);
+                }
+                else if (state is InternetDisconnected)
+                {
+                  return const Text('Disconnected',
+                    style: TextStyle(
+                        fontSize: 50
+                    ),);
+                }
+                return CircularProgressIndicator();
+              },
             ),
             BlocConsumer<CounterCubit, CounterState>( // Combines BlocBuilder and BlocListener to optimize code
               builder: (context, state) {
@@ -76,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
               },
             ),
-            Row(
+            /*Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 FloatingActionButton(
@@ -94,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   heroTag: 'To Add',
                 ),
               ],
-            ),
+            ),*/
             SizedBox(height: 24,),
             MaterialButton(onPressed: () {
               Navigator.of(context).pushNamed('/second');

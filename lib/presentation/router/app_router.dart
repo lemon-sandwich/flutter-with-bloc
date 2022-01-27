@@ -19,13 +19,11 @@ class AppRouter {
             builder: (_) => const SecondScreen(
                       title: 'Second Screen', colors: Colors.redAccent),
                 );
-        break;
       case '/third':
         return MaterialPageRoute(
             builder: (_) => const ThirdScreen(
                       title: 'Third Screen', colors: Colors.greenAccent),
                 );
-        break;
       default:
         return null;
     }
