@@ -38,25 +38,25 @@ class _SecondScreenState extends State<SecondScreen> {
             ),
             BlocConsumer<CounterCubit, CounterState>(
               builder: (context, state) {
-                if (state.CounterValue < 0) {
+                if (state.counterValue < 0) {
                   return Text(
-                    'Negative: ${state.CounterValue}',
+                    'Negative: ${state.counterValue}',
                     style: Theme.of(context).textTheme.headline4,
                   );
-                } else if (state.CounterValue % 2 == 0) {
+                } else if (state.counterValue % 2 == 0) {
                   return Text(
-                    'Even Number: ${state.CounterValue}',
+                    'Even Number: ${state.counterValue}',
                     style: Theme.of(context).textTheme.headline4,
                   );
                 }
-                else if (state.CounterValue % 2 != 0) {
+                else if (state.counterValue % 2 != 0) {
                   return Text(
-                    'Odd Number: ${state.CounterValue}',
+                    'Odd Number: ${state.counterValue}',
                     style: Theme.of(context).textTheme.headline4,
                   );
                 }
                 return Text(
-                  state.CounterValue.toString(),
+                  state.counterValue.toString(),
                   style: Theme.of(context).textTheme.headline4,
                 );
               },
@@ -81,7 +81,8 @@ class _SecondScreenState extends State<SecondScreen> {
               children: [
                 FloatingActionButton(
                   onPressed: () {
-                    BlocProvider.of<CounterCubit>(context).decrement();
+                   // BlocProvider.of<CounterCubit>(context).decrement();
+                    context.read<CounterCubit>().decrement();
                   },
                   heroTag: 'To Remove',
                   child: Icon(Icons.remove),
@@ -89,7 +90,8 @@ class _SecondScreenState extends State<SecondScreen> {
                 ),
                 FloatingActionButton(
                   onPressed: () {
-                    BlocProvider.of<CounterCubit>(context).increment();
+                    //BlocProvider.of<CounterCubit>(context).increment();
+                    context.read<CounterCubit>().increment();
                   },
                   child: Icon(Icons.add),
                   backgroundColor: widget.colors,
